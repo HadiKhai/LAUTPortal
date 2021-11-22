@@ -1,14 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react'
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Root from "./components/Root";
+import ConfigureStore from './configureStore'
+import {CircularProgress} from "@mui/material";
+import {persistStore} from "redux-persist";
+
+
+const ProviderAll = ({store}) => {
+    const [rehydrated, setRehydrated] = useState(false)
+    const [persist, setPersist] = useState({})
+
+    useEffect(() => {
+        setPersist(persistStore(store, {}, () => setRehydrated(true)))
+    }, [store])
+
+    if (!rehydrated) {
+        return <CircularProgress/>
+    }
+
+    return (
+        <Provider store={store}>
+            <PersistGate loading={<CircularProgress/>} persistor={persist}>
+                <Root/>
+            </PersistGate>
+        </Provider>
+    )
+}
+
+const {store} = ConfigureStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <ProviderAll store={store}/>
+    ,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
