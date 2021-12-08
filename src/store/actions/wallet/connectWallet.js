@@ -43,10 +43,6 @@ export function connectWallet(web3Modal) {
                     console.log('close')
                     dispatch(disconnectWallet(web3, web3Modal));
                 });
-                // provider.on('disconnect', async () => {
-                //     console.log('disconnect')
-                //     dispatch(disconnectWallet(web3, web3Modal));
-                // });
                 provider.on('accountsChanged', async (accounts) => {
                     console.log('accountsChanged')
                     if (accounts[0]) {

@@ -7,6 +7,9 @@ import {useFetchBalance} from "../../store/hooks/contract/useFetchBalance";
 import {LAUT, USDT} from "../../utils/constants";
 import validator from "validator/es";
 import {useContract} from "../../store/hooks/contract/useContract";
+import {useMutation} from "../../query";
+import {TX_MUTATION} from "../../query/config/keys";
+import {useGlobalSettings} from "../../store/hooks/globalSettings/useGlobalSettings";
 
 
 export const CustomTextField = styled(TextField)({
@@ -29,6 +32,8 @@ const Exchange = () => {
 
     const theme = useTheme();
 
+    const mutation = useMutation(TX_MUTATION)
+
     const matchesMd = useMediaQuery(theme.breakpoints.up('md'));
 
     const {fetchBalance, fetchBalancePending, tokenData} = useFetchBalance()
@@ -36,6 +41,8 @@ const Exchange = () => {
     const [from,setFrom] = useState(USDT)
 
     const [to,setTo] = useState(LAUT)
+
+    const { address } = useGlobalSettings()
 
     const [error,setError] = useState('')
 
@@ -50,7 +57,19 @@ const Exchange = () => {
     }
 
     const handleSwap = () => {
-        exchange({from,fromValue,to,toValue})
+        exchange({from,fromValue,to,toValue}).then((transactionHash) =>
+            mutation.mutate(
+                {
+                    id:transactionHash,
+                    receiver:'EXCHANGE',
+                    sender:address,
+                    type:from===USDT?'DEPOSIT':'WITHDRAW',
+                    amount:fromValue,
+                    details:{}
+                }
+            )
+        )
+
     }
     const changeFromValue = (value) => {
         const a = validator.isNumeric(value)

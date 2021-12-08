@@ -17,7 +17,6 @@ export function fetchBalance() {
         const { wallet } = getState();
         const { web3, address } = wallet;
 
-        console.log('fetchbbb')
         return new Promise((resolve, reject) => {
             const multicall = new MultiCall(
                 web3,
@@ -31,10 +30,6 @@ export function fetchBalance() {
                     TOKENS[`${token}`].address,
                 );
 
-                console.log(TOKENS[`${token}`].address)
-                console.log(tokenContract,address)
-
-
                 return {
                     token: TOKENS[`${token}`].name,
                     balance: tokenContract.methods.balanceOf(address),
@@ -42,7 +37,6 @@ export function fetchBalance() {
                 };
             });
 
-            console.log(calls)
             multicall
                 .all([calls])
                 .then((results) => {

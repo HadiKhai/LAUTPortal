@@ -34,6 +34,7 @@ import Exchange from "../Dashboard/Exchange";
 import './Dashboard.css'
 import Marquee from "react-marquee-slider";
 import Transfer from "../Dashboard/Transfer";
+import History from "../Dashboard/History";
 
 export const modalStyle = {
     position: 'absolute',
@@ -81,6 +82,10 @@ const Dashboard = () => {
                     return 'dashboard';
                 case EXCHANGE_PATH:
                     return 'exchange';
+                case TRANSFER_PATH:
+                    return 'transfer';
+                case HISTORY_PATH:
+                    return 'history';
                 default:
                     return 'dashboard'
 
@@ -96,6 +101,12 @@ const Dashboard = () => {
                 break;
             case 'exchange':
                 push(EXCHANGE_PATH);
+                break;
+            case 'transfer':
+                push(TRANSFER_PATH);
+                break;
+            case 'history':
+                push(HISTORY_PATH);
                 break;
             default:
                 push(DASHBOARD_PATH);
@@ -349,6 +360,7 @@ const Dashboard = () => {
                         <Route exact path={DASHBOARD_PATH} component={ControlPanel}/>
                         <Route path={EXCHANGE_PATH} component={Exchange}/>
                         <Route path={TRANSFER_PATH} component={Transfer}/>
+                        <Route path={HISTORY_PATH} component={History}/>
                         <Redirect to={DASHBOARD_PATH}/>
                     </Switch>
                 </div>:

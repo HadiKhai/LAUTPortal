@@ -4,10 +4,13 @@ import styled from "@emotion/styled";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import './Exchange.css';
 import {useFetchBalance} from "../../store/hooks/contract/useFetchBalance";
-import {LAUT} from "../../utils/constants";
+import {LAUT, USDT} from "../../utils/constants";
 import validator from "validator/es";
 import {useContract} from "../../store/hooks/contract/useContract";
 import Web3 from "web3";
+import {useMutation} from "../../query";
+import {TX_MUTATION} from "../../query/config/keys";
+import {useGlobalSettings} from "../../store/hooks/globalSettings/useGlobalSettings";
 
 
 export const CustomTextField = styled(TextField)({
@@ -32,7 +35,11 @@ const Transfer = () => {
 
     const matchesMd = useMediaQuery(theme.breakpoints.up('md'));
 
+    const mutation = useMutation(TX_MUTATION)
+
     const {fetchBalance, tokenData} = useFetchBalance()
+
+    const { address } = useGlobalSettings()
 
     const [error,setError] = useState(false)
 
@@ -59,7 +66,18 @@ const Transfer = () => {
         if (!validity) {
             setError(true)
         } else {
-            transfer({to,value})
+            transfer({to,value}).then((transactionHash) => {
+                mutation.mutate(
+                    {
+                        id: transactionHash,
+                        receiver: to,
+                        sender: address,
+                        type: 'TRANSFER',
+                        amount: value,
+                        details: {}
+                    }
+                )
+            })
         }
     }
 

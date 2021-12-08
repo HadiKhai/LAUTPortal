@@ -39,6 +39,7 @@ export function transfer({to,value}) {
                                 dispatch(fetchBalance())
                             }
                             ,3000)
+
                         resolve(receipt.transactionHash)
                     })
                     .on('error',function (error) {

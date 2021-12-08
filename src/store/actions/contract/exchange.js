@@ -7,7 +7,6 @@ import {CONTRACTS} from "../../../contracts/addresses";
 import {USDT} from "../../../utils/constants";
 import {fetchBalance} from "./fetchBalance";
 
-
 export function exchange({from, to, fromValue, toValue}) {
     return (dispatch, getState) => {
         dispatch({
@@ -15,6 +14,7 @@ export function exchange({from, to, fromValue, toValue}) {
         })
         const { wallet } = getState();
         const { web3, address } = wallet;
+
 
         console.log(address,fromValue)
         if(from===USDT){
@@ -36,6 +36,7 @@ export function exchange({from, to, fromValue, toValue}) {
                         .on('transactionHash', function (hash) { console.log(hash) })
                         .on('receipt', function (receipt) {
                             console.log(receipt)
+
                             dispatch({
                                 type: DEPOSIT_SUCCESS
                             })
@@ -88,6 +89,7 @@ export function exchange({from, to, fromValue, toValue}) {
                         .on('transactionHash', function (hash) { console.log(hash) })
                         .on('receipt', function (receipt) {
                             console.log(receipt)
+
                             dispatch({
                                 type: DEPOSIT_SUCCESS
                             })
