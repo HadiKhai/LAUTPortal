@@ -65,7 +65,7 @@ const Exchange = () => {
                     sender:address,
                     type:from===USDT?'DEPOSIT':'WITHDRAW',
                     amount:fromValue,
-                    details:{}
+                    details:"{}"
                 }
             )
         )

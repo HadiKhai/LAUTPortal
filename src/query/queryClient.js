@@ -8,7 +8,7 @@ import configureMutations from "./mutations/mutations";
 const configureQueryClient = () => {
     const baseConfig = {
         API_HOST:
-            'http://lautoken.uaenorth.cloudapp.azure.com:8000/api',
+            'https://lautoken.azurewebsites.net/api',
         keepPreviousData: true,
     };
 

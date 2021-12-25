@@ -90,7 +90,7 @@ const History =  () => {
                                                         <StyledTableCell align="left">Tx Hash</StyledTableCell >
                                                         <StyledTableCell align="center">Amount</StyledTableCell>
                                                         <StyledTableCell align="center">Type</StyledTableCell>
-                                                        <StyledTableCell align="right">Details</StyledTableCell>
+                                                        <StyledTableCell align="right">Date</StyledTableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -134,7 +134,7 @@ const History =  () => {
                                                         <StyledTableCell align="left">Receiver</StyledTableCell >
                                                         <StyledTableCell align="center">Amount</StyledTableCell>
                                                         <StyledTableCell align="center">Type</StyledTableCell>
-                                                        <StyledTableCell align="right">Details</StyledTableCell>
+                                                        <StyledTableCell align="right">Date</StyledTableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -186,7 +186,7 @@ const History =  () => {
                                                         <StyledTableCell align="left">Receiver</StyledTableCell>
                                                         <StyledTableCell align="center">Amount</StyledTableCell>
                                                         <StyledTableCell align="center">Type</StyledTableCell>
-                                                        <StyledTableCell align="right">Details</StyledTableCell>
+                                                        <StyledTableCell align="right">Date</StyledTableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>

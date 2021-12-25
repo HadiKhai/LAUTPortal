@@ -74,7 +74,7 @@ const Transfer = () => {
                         sender: address,
                         type: 'TRANSFER',
                         amount: value,
-                        details: {}
+                        details: "{}"
                     }
                 )
             })

@@ -1,7 +1,9 @@
-const GET_TX = '/transactions'
+const getTXBuilder = (address) => '/transactions/'+address;
 const CREATE_TX = '/transactions/create'
 
+
+
 export {
-    GET_TX,
+    getTXBuilder,
     CREATE_TX
 }
